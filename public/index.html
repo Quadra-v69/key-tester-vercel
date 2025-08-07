@@ -74,6 +74,37 @@ footer {
 .social-links a:hover {
   text-decoration: underline;
 }
+
+    h1, p, #result {
+  text-shadow: 0 0 5px #0ff, 0 0 10px #0ff, 0 0 20px #0ff;
+}
+
+button {
+  box-shadow: 0 0 10px #0ff;
+}
+
+input {
+  box-shadow: 0 0 5px #0ff inset;
+}
+
+a {
+  text-shadow: 0 0 5px #0ff;
+}
+body {
+  cursor: none;
+}
+
+.neon-cursor {
+  position: fixed;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #0ff;
+  pointer-events: none;
+  box-shadow: 0 0 15px #0ff, 0 0 25px #0ff;
+  z-index: 9999;
+}
+
   </style>
     
 </head>
@@ -129,5 +160,17 @@ footer {
       }
     }
   </script>
+
+  <div class="neon-cursor" id="cursor"></div>
+
+<script>
+  const cursor = document.getElementById("cursor");
+
+  document.addEventListener("mousemove", (e) => {
+    cursor.style.left = e.clientX + "px";
+    cursor.style.top = e.clientY + "px";
+  });
+</script>
+
 </body>
 </html>
