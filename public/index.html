@@ -7,14 +7,12 @@
   <link rel="stylesheet" href="/style.css" />
 </head>
 <body>
-  <!-- Loading screen -->
   <div id="loader" class="loading-screen">
     <img src="https://lostsec.xyz/assets/images/spider.png" alt="Spider" class="loader-image" />
     <h1>OpenKey Tester</h1>
     <p>Developed by Quadra _v69</p>
   </div>
 
-  <!-- App -->
   <div class="container" style="display:none;">
     <h1>OpenKey Tester</h1>
     <input type="text" id="apiKey" placeholder="Enter OpenAI API Key" />
@@ -47,19 +45,14 @@
       try {
         const response = await fetch("/api/check-key", {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ apiKey: key }),
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ apiKey: key })
         });
 
         const data = await response.json();
-
-        if (data.valid) {
-          document.getElementById("result").textContent = "✅ Valid API Key!";
-        } else {
-          document.getElementById("result").textContent = "❌ Invalid API Key.";
-        }
+        document.getElementById("result").textContent = data.valid
+          ? "✅ Valid API Key!"
+          : "❌ Invalid API Key.";
       } catch {
         document.getElementById("result").textContent = "⚠️ Error checking key.";
       }
