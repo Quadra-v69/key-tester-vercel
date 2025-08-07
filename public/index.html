@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>OpenKey Tester</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Loading screen -->
+  <div id="loader" class="loading-screen">
+    <img src="https://lostsec.xyz/assets/images/spider.png" alt="Spider" class="loader-image" />
+    <h1>OpenKey Tester</h1>
+    <p>Developed by Quadra _v69</p>
+  </div>
+
+  <!-- App -->
+  <div class="container" style="display:none;">
+    <h1>OpenKey Tester</h1>
+    <input type="text" id="apiKey" placeholder="Enter OpenAI API Key" />
+    <button onclick="checkKey()">Check Key</button>
+    <p id="result"></p>
+
+    <footer>
+      <p>Connect with me:</p>
+      <div class="social-links">
+        <a href="https://linkedin.com/in/rantu-dev" target="_blank">LinkedIn</a>
+        <a href="https://x.com/Quadra_v69" target="_blank">X (Twitter)</a>
+        <a href="https://instagram.com/reflame.x" target="_blank">Instagram</a>
+        <a href="https://github.com/quadra-v69" target="_blank">GitHub</a>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    window.onload = () => {
+      setTimeout(() => {
+        document.getElementById("loader").style.display = "none";
+        document.querySelector(".container").style.display = "block";
+      }, 2000);
+    };
+
+    async function checkKey() {
+      const key = document.getElementById("apiKey").value;
+      document.getElementById("result").textContent = "Checking...";
+
+      try {
+        const response = await fetch("/api/check-key", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ apiKey: key }),
+        });
+
+        const data = await response.json();
+
+        if (data.valid) {
+          document.getElementById("result").textContent = "✅ Valid API Key!";
+        } else {
+          document.getElementById("result").textContent = "❌ Invalid API Key.";
+        }
+      } catch {
+        document.getElementById("result").textContent = "⚠️ Error checking key.";
+      }
+    }
+  </script>
+</body>
+</html>
